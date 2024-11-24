@@ -1,0 +1,22 @@
+// mixins
+@mixin botonm() {
+    background-color: $primary-color;
+    border: 10px;
+    border: 0px;
+    padding: 10px;
+    color:$light-color;
+    margin-top: 5px;
+    border-radius: 1rem;
+    &:hover{
+      background-color: $third-color;
+    }
+}
+
+@mixin mx-auto() {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin byn() {
+  filter: sepia(100%);
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">  
+<head>    
+    <title>PuntoSalud - Contacto</title>    
+    <meta charset="UTF-8">
+    <meta name="title" content="PuntoSalud - Contacto">
+    <meta name="description" content="PuntoSalud - Contacto">    
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+      <!-- Boxicons -->      
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>  
+<body>   
+  <header class="header">
+    <nav class="navbar navbar-expand-lg header_navbar" data-bs-theme="dark">
+        <a class="navbar-logo" href="index.html"><img src="assets/images/lg2.svg" width="250" alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class='bx bx-menu'></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="equipo.html">Equipo Médico</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="agendar.html"><button class="btn nav_link_btn">Reservar cita</button></a>
+            </li>
+          </ul>
+      </div>
+    </nav>
+  </header>   
+
+  <section class="banner">
+    <article class="banner_container">
+    <h1>Agendar</h1>
+  </article>
+</section>
+
+
+<div class="container my-4">
+    <h2 class="text-center">Agenda Médica</h2>
+
+    <div class="row">
+        <div class="col-lg-12 text-center py-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Agregar hora
+              </button>
+        </div>
+        <div class="col-lg-12 text-center py-2">
+                <button onclick="cancelarCita()" class="btn btn-primary">Cancelar última cita</button>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-4">Citas Agendadas:</h2>
+
+
+    <div class="row" id="listaCitas">
+
+    </div>
+    
+  </div>
+
+
+  
+<footer class="footer">
+  <div class="row footer_contenedor">
+    <div class="col-lg-12 footer_text">
+      <p>© PuntoSalud 2024 Company, Inc</p>
+    </div>
+
+    <div class="col-lg-4 footer_link"><a href="index.html">Home</a></div>
+    <div class="col-lg-4 footer_link"><a href="equipo.html">Equipo Médico</a></div>
+    <div class="col-lg-4 footer_link"><a href="contacto.html">Contacto</a></div>
+  
+    <div class="col-lg-4 footer_link"><a href="#"><i class='bx bxl-instagram-alt' name='instagram-square' alt="icono instagram"></i></a></div>
+    <div class="col-lg-4 footer_link"><a href="#"><i class='bx bxl-facebook-square' name='facebook-square' alt="icono facebook"></i></a></div>
+    <div class="col-lg-4 footer_link"><a href="#"><i class='bx bxl-youtube' name='youtube-square' alt="icono youtube"></i></a></div>
+  </div>
+</footer> 
+
+<script src="assets/js/agendar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
+
+              <!-- Modal Agenda -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2>Agendar hora</h2>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>                    
+                    <div class="modal-body">
+      
+                        <div class="mb-3 form-check">
+                            <label for="nombre" class="form-label">Nombre del paciente:</label>
+                            <input type="text" id="nombre" placeholder="Ingrese el nombre" class="form-control" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label for="fecha" class="form-label">Fecha de la cita:</label>
+                            <input type="date" id="fecha" class="form-control" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label for="hora" class="form-label">Hora de la cita:</label>
+                            <input type="time" id="hora" class="form-control" value="13:30" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <button onclick="agendarCita()" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Agendar cita</button>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- / Modal Agenda -->
+</body>  
+</html>

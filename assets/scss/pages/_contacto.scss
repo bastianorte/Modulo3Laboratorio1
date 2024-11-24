@@ -1,0 +1,117 @@
+
+
+
+.contacto{
+  margin: 3rem 0rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contacto_row_col{
+  h2{
+    font-weight: 600;
+  }
+}
+
+
+.form_botton{
+  button{
+@include botonm;
+font-size: 1rem;
+width: 100%;
+    }
+  }
+
+.mapa{
+  padding: 2rem 0rem 5rem 0rem;
+  h2{
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+}
+
+
+
+form {
+	
+  .form-control {
+    background-color: #f2f6f8;
+		border-radius: 1rem;
+    border: none;
+    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.11);
+    margin-bottom: 15px;
+		
+    &.thick {
+      height: 3.3rem;
+    }
+		
+		&:focus {
+			background-color: #f2f6f8;
+			border: none;
+			box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.11);
+		}
+  }
+
+	.message .form-control {
+			padding: .5rem 1.8rem;
+	}
+
+  input,
+  textarea {
+    font-size: 1.1rem;
+  }
+
+	::placeholder {
+    font-family: $font-family-sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: $third-color;
+    position: relative;
+    left: 0;
+  }
+
+}
+
+.input-group-text{
+  font-size: 100px;
+}
+
+
+
+@media (max-width: 780px) {
+  .mapa_contenedor {
+    iframe{
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+ }
+
+@media (min-width: 781px) and (max-width: 1280px) {
+  .mapa_contenedor {
+    iframe{
+      width: 100%;
+      height: 600px;
+    }
+  }
+
+ }
+
+ @media (min-width: 1281px) {
+  .mapa_contenedor {
+    iframe{
+      width: 100%;
+      height: 800px;
+    }
+  }
+
+ }
+
+
+
+
+
+
+
+ 

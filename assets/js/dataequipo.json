@@ -1,0 +1,50 @@
+[
+    {   "nombre": "Dr. Juan Pérez",
+        "especialidad": "Cardiología", 
+        "imagen": "assets/images/pr4.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"                    
+    },
+    {   "nombre": "Dra. Ana López", 
+        "especialidad": "Cardiología", 
+        "imagen": "assets/images/pr8.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dr. Mario Díaz", 
+        "especialidad": "Dermatología", 
+        "imagen": "assets/images/pr5.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dra. Carla Sánchez", 
+        "especialidad": "Dermatología", 
+        "imagen": "assets/images/pr9.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dr. Luis Martínez", 
+        "especialidad": "Pediatría", 
+        "imagen": "assets/images/pr6.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dra. Patricia Gómez", 
+        "especialidad": "Pediatría",
+        "imagen": "assets/images/pr10.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dr. Jorge Ruiz", 
+        "especialidad": "Neurología", 
+        "imagen": "assets/images/pr7.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    },
+    {   "nombre": "Dra. Marta Torres",    
+        "especialidad": "Neurología", 
+        "imagen": "assets/images/pr11.jpg",
+        "Experiencia": "1",
+        "Disponibilidad": "Si"          
+    }
+]
