@@ -6,7 +6,7 @@
   Si tienes Git instalado en tu máquina, puedes clonar el repositorio usando el siguiente comando en tu terminal o línea de comandos:
 
   ```
-  git clone https://github.com/bastianorte/modulo2e3.git
+  git clone https://github.com/bastianorte/Modulo3Laboratorio1.git
   ```
 
   #### Para poder ver la Web de forma correcta debes generar un servidor con "Live Server" de Visual Studio Code o similar
@@ -183,8 +183,6 @@ Utilice el metodo pop eliminar la ultima cita registrada al arreglo
 ```
   const citaCancelada = citas.pop(); // Eliminar la última cita
 ```
-
-## Complejidad de los algoritmos
 
 
 ## 🔧 Tecnologías utilizadas
