@@ -100,40 +100,40 @@ medicos_update.json
 Para el merge, utilicé un arreglo de médicos que se combinan con el arreglo original.
 
 ```
-    // Función merge
-    function mergeMedicos(original, update) {
-      const medicosMap = new Map(original.map(medico => [medico.id, medico]));
+// Función merge
+function mergeMedicos(original, update) {
+  const medicosMap = new Map(original.map(medico => [medico.id, medico]));
 
-      update.forEach(medico => {
-        if (medicosMap.has(medico.id)) {
-          medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
-        } else {
-          medicosMap.set(medico.id, medico);
-        }
-      });
-
-      return Array.from(medicosMap.values());
+  update.forEach(medico => {
+    if (medicosMap.has(medico.id)) {
+      medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
+    } else {
+      medicosMap.set(medico.id, medico);
     }
+  });
 
-    El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
-    El método .set() en JavaScript tiene una complejidad temporal de O(1)
+  return Array.from(medicosMap.values());
+}
+
+El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
+El método .set() en JavaScript tiene una complejidad temporal de O(1)
 ```
 
 ### Clonación
 Para la clonación, utilicé una clonación profunda, que permite duplicar objetos anidados. Realicé la clonación a partir del objeto resultante del merge.
 
 ```
-    let clondoctors = JSON.parse(JSON.stringify(nuevosServicios)); // Clonamos el objeto con el objeto merge
+let clondoctors = JSON.parse(JSON.stringify(nuevosServicios)); // Clonamos el objeto con el objeto merge
 
-    La clonación profunda tiene una complejidad de O(n) donde n es el numero de arreglos del objeto
+La clonación profunda tiene una complejidad de O(n) donde n es el numero de arreglos del objeto
 ```
 
 ### Recorrido
 Para realizar el recorrido, utilicé el método map() junto con desestructuración de los campos id, nombre, especialidad, imagen, experiencia y sexo.
 ```
-    medicos.map(({ id, nombre, especialidad, imagen, experiencia, sexo }) => {});
+medicos.map(({ id, nombre, especialidad, imagen, experiencia, sexo }) => {});
 
-    El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
+El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
 ```
 
 ## Estructuras de datos
@@ -141,9 +141,9 @@ Para realizar el recorrido, utilicé el método map() junto con desestructuraci�
 ### Arreglos
 Para agregar un nuevo doctor implemente un formulario con el metodo push()
 ```
-      medicos.push(nuevoMedico);
+medicos.push(nuevoMedico);
 
-    .push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1)
 ```
 
 
@@ -166,12 +166,12 @@ function eliminarMedico(id) {
 
 Para buscar un nuevo doctor use un filtro que buscaba por nombre y especialidad
 ```
-  const doctoresFiltrados = clondoctors.filter(doctor => 
-    doctor.nombre.toLowerCase().includes(input) || 
-    doctor.especialidad.toLowerCase().includes(input)
-  );
+const doctoresFiltrados = clondoctors.filter(doctor => 
+  doctor.nombre.toLowerCase().includes(input) || 
+  doctor.especialidad.toLowerCase().includes(input)
+);
 
-  El método .filter() en JavaScript tiene una complejidad de O(n), donde n es el número de elementos en el array.
+El método .filter() en JavaScript tiene una complejidad de O(n), donde n es el número de elementos en el array.
 ```
 
 Para ordenar los arrays por orden de nombre use el metodo .sort
@@ -195,18 +195,18 @@ Para gestionar las colas, utilicé una estructura que garantizara que los pacien
 Utilice el metodo push() para agregar pacientes al arreglo
 
 ```
-    colaPacientes.push(paciente);  // Encolar paciente al final
+colaPacientes.push(paciente);  // Encolar paciente al final
 
 
-    .push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1)
 ```
 
 y el metodo shift() para eliminar el primer paciente por orden de llegada
 
 ```
-    const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
+const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
 
-    .shift tiene una complejidad de O(1)
+.shift tiene una complejidad de O(1)
 ```
 
 ### Pilas
@@ -214,17 +214,17 @@ Para gestionar las pilas, utilicé una estructura que permitiera eliminar la úl
 
 Utilice el metodo push para agregar citas al arreglo
 ```
-  citas.push(cita); // Agregar cita a la pila
+citas.push(cita); // Agregar cita a la pila
 
-  .push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1)
 ```
 
 Utilice el metodo pop eliminar la ultima cita registrada al arreglo 
 
 ```
-  const citaCancelada = citas.pop(); // Eliminar la última cita
+const citaCancelada = citas.pop(); // Eliminar la última cita
 
-  .pop tiene una complejidad de O(1)
+.pop tiene una complejidad de O(1)
 ```
 
 
