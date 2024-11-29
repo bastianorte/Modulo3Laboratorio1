@@ -100,20 +100,23 @@ medicos_update.json
 Para el merge, utilicé un arreglo de médicos que se combinan con el arreglo original.
 
 ```
-// Función merge
-function mergeMedicos(original, update) {
-  const medicosMap = new Map(original.map(medico => [medico.id, medico]));
+    // Función merge
+    function mergeMedicos(original, update) {
+      const medicosMap = new Map(original.map(medico => [medico.id, medico]));
 
-  update.forEach(medico => {
-    if (medicosMap.has(medico.id)) {
-      medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
-    } else {
-      medicosMap.set(medico.id, medico);
+      update.forEach(medico => {
+        if (medicosMap.has(medico.id)) {
+          medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
+        } else {
+          medicosMap.set(medico.id, medico);
+        }
+      });
+
+      return Array.from(medicosMap.values());
     }
-  });
 
-  return Array.from(medicosMap.values());
-}
+    El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
+    El método .set() en JavaScript tiene una complejidad temporal de O(1)
 ```
 
 ### Clonación
@@ -121,12 +124,16 @@ Para la clonación, utilicé una clonación profunda, que permite duplicar objet
 
 ```
     let clondoctors = JSON.parse(JSON.stringify(nuevosServicios)); // Clonamos el objeto con el objeto merge
+
+    La clonación profunda tiene una complejidad de O(n) donde n es el numero de arreglos del objeto
 ```
 
 ### Recorrido
 Para realizar el recorrido, utilicé el método map() junto con desestructuración de los campos id, nombre, especialidad, imagen, experiencia y sexo.
 ```
-        clondoctors.map(({ id, nombre, especialidad, imagen, experiencia, sexo }) => {});
+    medicos.map(({ id, nombre, especialidad, imagen, experiencia, sexo }) => {});
+
+    El método .map() en JavaScript tiene una complejidad temporal de O(n), donde n es el numero de medicos
 ```
 
 ## Estructuras de datos
@@ -134,20 +141,26 @@ Para realizar el recorrido, utilicé el método map() junto con desestructuraci�
 ### Arreglos
 Para agregar un nuevo doctor implemente un formulario con el metodo push()
 ```
-clondoctors.push(nuevoDoctor);
+      medicos.push(nuevoMedico);
+
+    .push tiene una complejidad de O(1)
 ```
 
 
 Para eliminar un nuevo doctor hice una funcion para buscar el doctor por id y eliminarlo con el metodo splice()
 ```
-    function eliminarDoctor(id) {
-        // Filtrar el doctor con el ID correspondiente
-        const indice = clondoctors.findIndex(doctor => doctor.id === id);
-        if (indice !== -1) {
-            clondoctors.splice(indice, 1);  // Eliminar el doctor del arreglo
-            mostrarDoctores();  // Actualizar 
-        }
-    }
+function eliminarMedico(id) {
+  // Filtrar el doctor con el ID correspondiente
+  const indice = medicos.findIndex(medico => medico.id === id);
+  console.log(id)
+  if (indice !== -1) {
+      medicos.splice(indice, 1);  // Eliminar el doctor del arreglo
+      renderizarMedicos();
+  }
+}
+
+  .findIndex() en JavaScript tiene una complejidad de O(n), donde n es el número de elementos en el array.
+  El método .splice() en JavaScript tiene una complejidad de O(n)
 ```
 
 
@@ -157,6 +170,22 @@ Para buscar un nuevo doctor use un filtro que buscaba por nombre y especialidad
     doctor.nombre.toLowerCase().includes(input) || 
     doctor.especialidad.toLowerCase().includes(input)
   );
+
+  El método .filter() en JavaScript tiene una complejidad de O(n), donde n es el número de elementos en el array.
+```
+
+Para ordenar los arrays por orden de nombre use el metodo .sort
+```
+function ordenarPorExperiencia() {
+  if (sortAscendente) {
+    medicos.sort((a, b) => a.experiencia - b.experiencia);  
+    iconoExperiencia.className = "bx bx-down-arrow-alt";  
+  } else {
+    medicos.sort((a, b) => b.experiencia - a.experiencia);  
+    iconoExperiencia.className = "bx bx-up-arrow-alt";  
+  }
+
+  el metodo .sort tiene complejidad de O(n log n), donde n es el número de elementos en el array.
 ```
 
 
@@ -164,13 +193,20 @@ Para buscar un nuevo doctor use un filtro que buscaba por nombre y especialidad
 Para gestionar las colas, utilicé una estructura que garantizara que los pacientes fueran atendidos en el mismo orden en que se registraron en la ventana de contacto.
 
 Utilice el metodo push() para agregar pacientes al arreglo
+
 ```
-        colaPacientes.push(paciente);  // Encolar paciente al final
+    colaPacientes.push(paciente);  // Encolar paciente al final
+
+
+    .push tiene una complejidad de O(1)
 ```
 
 y el metodo shift() para eliminar el primer paciente por orden de llegada
+
 ```
-        const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
+    const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
+
+    .shift tiene una complejidad de O(1)
 ```
 
 ### Pilas
@@ -179,12 +215,16 @@ Para gestionar las pilas, utilicé una estructura que permitiera eliminar la úl
 Utilice el metodo push para agregar citas al arreglo
 ```
   citas.push(cita); // Agregar cita a la pila
+
+  .push tiene una complejidad de O(1)
 ```
 
 Utilice el metodo pop eliminar la ultima cita registrada al arreglo 
 
 ```
   const citaCancelada = citas.pop(); // Eliminar la última cita
+
+  .pop tiene una complejidad de O(1)
 ```
 
 
