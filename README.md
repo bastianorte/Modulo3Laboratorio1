@@ -143,7 +143,7 @@ Para agregar un nuevo doctor implemente un formulario con el metodo push()
 ```
 medicos.push(nuevoMedico);
 
-.push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1), solo se agrega el ultimo médico
 ```
 
 
@@ -198,7 +198,7 @@ Utilice el metodo push() para agregar pacientes al arreglo
 colaPacientes.push(paciente);  // Encolar paciente al final
 
 
-.push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1), solo de agrega el ultimo paciente
 ```
 
 y el metodo shift() para eliminar el primer paciente por orden de llegada
@@ -206,7 +206,7 @@ y el metodo shift() para eliminar el primer paciente por orden de llegada
 ```
 const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
 
-.shift tiene una complejidad de O(1)
+.shift tiene una complejidad de O(1), solo se elimina el primer paciente
 ```
 
 ### Pilas
@@ -216,7 +216,7 @@ Utilice el metodo push para agregar citas al arreglo
 ```
 citas.push(cita); // Agregar cita a la pila
 
-.push tiene una complejidad de O(1)
+.push tiene una complejidad de O(1), solo se agrega la ultima cita
 ```
 
 Utilice el metodo pop eliminar la ultima cita registrada al arreglo 
@@ -224,7 +224,8 @@ Utilice el metodo pop eliminar la ultima cita registrada al arreglo
 ```
 const citaCancelada = citas.pop(); // Eliminar la última cita
 
-.pop tiene una complejidad de O(1)
+.pop tiene una complejidad de O(1), se elimina la ultima cita
+
 ```
 
 
