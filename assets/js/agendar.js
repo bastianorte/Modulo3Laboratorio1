@@ -15,7 +15,6 @@
         };
 
         citas.push(cita); // Agregar cita a la pila
-        console.log(fecha)
         // Limpiar los campos del formulario
         document.getElementById("nombre").value = "";
         document.getElementById("fecha").value = "";
@@ -68,3 +67,4 @@
         lista.appendChild(card); 
       });
     }
+

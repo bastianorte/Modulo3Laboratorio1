@@ -55,42 +55,40 @@
 </section>
 
 <div class="container">
-  <div class="row pb-2">
-    <div class="col-lg-3 text-left">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Agregar Doctor
-        </button>
-    </div>
-    <div class="col-lg-4 text-left">
-  <!-- Campo único de búsqueda -->
-  <input type="text" class="form-control" id="searchInput" placeholder="Buscar por nombre o especialidad..." onkeyup="buscarDoctor()">
-  </div>
-  <div class="col-lg-5 text-left">
+
+
+
+
+  <div class="container">
+    <div class="row pb-2">
+      <div class="col-lg-3 text-left">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar Doctor
+          </button>
+      </div>
+      <div class="col-lg-4 text-left">
     <!-- Campo único de búsqueda -->
-    <button onclick="alternarOrdenarPorNombre()" class="btn btn-primary">Ordenar por Nombre <i id="iconoNombre" class="bx bx-up-arrow-alt"></i></button>
-    <button onclick="alternarOrdenarPorExperiencia()" class="btn btn-primary">Ordenar por Experiencia <i id="iconoExperiencia" class="bx bx-up-arrow-alt"></i></button>
+    <input type="text" class="form-control" id="search" placeholder="Buscar por nombre o especialidad..."  >
+    </div>
+    <div class="col-lg-5 text-left">
+      <!-- Campo único de búsqueda -->
+      <button id="toggleSortBtn" class="btn btn-primary">Ordenar por Nombre <i id="iconoNombre" class="bx bx-up-arrow-alt"></i></button>
+      <button id="sortByExperienceBtn" class="btn btn-primary">Ordenar por Experiencia <i id="iconoExperiencia" class="bx bx-up-arrow-alt"></i></button>
+      </div>
     </div>
   </div>
-</div>
 
 
-
-
-
-
-
-<div class="container">
-  <div id="doctorCards" class="row">
-
+  <!-- Tabla para mostrar la lista de médicos -->
+  <h2>Lista de Médicos</h2>
+  <div id="medicosTable" class="row">
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12 py-4" id="consola">
 
-  </div>
-</div>
+
+
 
 
 <footer class="footer">
@@ -120,17 +118,23 @@
               <div class="modal-body">
 
                 <form id="addDoctorForm">
+                  <input type="hidden" id="medicoId">
                   <div class="mb-3">
                     <label class="form-label">Nombre:</label>
                     <input type="text" id="nombre" class="form-control" required>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Especialidad:</label>
-                    <input type="text" id="especialidad" class="form-control" required>
+                    <select class="form-control" id="especialidad"> 
+                      <option value="Cardiologia">Cardiologia</option>
+                      <option value="Neurologia">Neurologia</option>
+                      <option value="Pediatria">Pediatria</option>
+                      <option value="Dermatologia">Dermatologia</option>                      
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Experiencia:</label>
-                    <input type="text" id="experiencia" class="form-control" required>
+                    <input type="text" id="experiencia" class="form-control" oninput="validarNumero(this)" required>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Genero:</label>
@@ -139,7 +143,7 @@
                       <option value="f">Mujer</option>
                     </select>
                   </div>
-                  <button type="submit" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary">Agregar Doctor</button>
+                  <button id="guardarBtn" type="submit" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary">Agregar Doctor</button>
                 </form>
 
               </div>

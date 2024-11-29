@@ -1,341 +1,225 @@
-    // Arreglo de doctores 
-const doctores = [
-    {
-        "id": 1,
-        "nombre": "Mauricio Palma",
-        "sexo": "m",
-        "especialidad": "Cardiología",
-        "imagen": "assets/images/pr4.jpg",
-        "experiencia": 5,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 2,
-        "nombre": "Barbara Brito",
-        "sexo": "f",
-        "especialidad": "Cardiología",
-        "imagen": "assets/images/pr8.jpg",
-        "experiencia": 9,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 3,
-        "nombre": "Ramiro Ramirez",
-        "sexo": "m",
-        "especialidad": "Dermatología",
-        "imagen": "assets/images/pr5.jpg",
-        "experiencia": 8,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 4,
-        "nombre": "Johana Perez",
-        "sexo": "f",
-        "especialidad": "Dermatología",
-        "imagen": "assets/images/pr9.jpg",
-        "experiencia": 7,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 5,
-        "nombre": "Luis Martínez",
-        "sexo": "m",
-        "especialidad": "Pediatría",
-        "imagen": "assets/images/pr6.jpg",
-        "experiencia": 6,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 6,
-        "nombre": "Patricia Gómez",
-        "sexo": "f",
-        "especialidad": "Pediatría",
-        "imagen": "assets/images/pr10.jpg",
-        "experiencia": 5,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 7,
-        "nombre": "Jorge Ruiz",
-        "sexo": "m",
-        "especialidad": "Neurología",
-        "imagen": "assets/images/pr7.jpg",
-        "experiencia": 4,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    },
-    {
-        "id": 8,
-        "nombre": "Marta Torres",
-        "sexo": "f",
-        "especialidad": "Neurología",
-        "imagen": "assets/images/pr11.jpg",
-        "experiencia": 3,
-        "disponibilidad": "Si",
-        "contacto": {
-        "telefono": 222,
-        "email": "j@gmail.com"
-      }
-    }
-  ]
+// Variables del DOM
+const medicosTableBody = document.getElementById('medicosTable')
+const nombreInput = document.getElementById('nombre');
+const especialidadInput = document.getElementById('especialidad');
+const experienciaInput = document.getElementById("experiencia"); 
+const generoInput = document.getElementById("genero");   
+const guardarBtn = document.getElementById('guardarBtn');
+const medicoIdInput = document.getElementById('medicoId');
+const searchInput = document.getElementById('search');
+const toggleSortBtn = document.getElementById('toggleSortBtn');
+const iconoNombre = document.getElementById('iconoNombre');
+const iconoExperiencia = document.getElementById('iconoExperiencia');
+const sortByExperienceBtn = document.getElementById('sortByExperienceBtn');
 
-// JSON de servicios brindados
-const servicios = [
-    { "id_medico": 1, "servicio": "Consulta Cardiológica" },
-    { "id_medico": 1, "servicio": "Electrocardiograma" },
-    { "id_medico": 2, "servicio": "Consulta Pediátrica" },
-    { "id_medico": 3, "servicio": "Consulta Dermatológica" },
-    { "id_medico": 3, "servicio": "Biopsia de piel" }
-    ]
-      
+// Variable global para los médicos
+let medicos = [];
+let sortAscendente = true; // Control de si el orden es ascendente (true) o descendente (false)
+let ordenAscendenteExperiencia = true;
 
-    // Función para fusionar los médicos con sus servicios
-    function mergeMedicosConServicios() {
-        // Usamos `map()` para recorrer los médicos
-        const medicosConServicios = doctores.map(medico => {
-          // Filtramos los servicios que pertenecen a este médico
-          const serviciosMedico = servicios.filter(servicio => servicio.id_medico === medico.id)
-                                           .map(servicio => servicio.servicio); // Obtenemos solo el nombre del servicio por id
-  
-          // Devolvemos el médico con una nueva propiedad 'servicios'
-          return {
-            ...medico, // Medico
-            servicios: serviciosMedico // Servicios
-          };
-        });
-  
-        return medicosConServicios; // Devolvemos el array de médicos con sus servicios
-      }
-    
-      // Creamos un nuevo arreglo con los doctores
-      const nuevosServicios = mergeMedicosConServicios();
+// Función para obtener los datos de los médicos de forma asíncrona (simula fetch desde un archivo JSON)
+async function obtenerMedicos() {
+  try {
+    const medicosResponse = await fetch('assets/js/medicos.json');  // Obtiene el primer JSON (médicos iniciales)
+    const updateResponse = await fetch('assets/js/medicos_update.json');  // Obtiene el segundo JSON (actualizaciones)
 
+    if (!medicosResponse.ok || !updateResponse.ok) throw new Error('Error al obtener los datos.');
 
+    const medicosData = await medicosResponse.json();  // Datos iniciales
+    const updateData = await updateResponse.json();    // Datos de actualización
+
+    // Fusionar los dos JSON
+    medicos = mergeMedicos(medicosData, updateData);
+
+    // Medicos Stringify
+    console.log("Medicos Stringify")
+    console.log(medicosStringify = JSON.stringify(medicos))
+    console.log("Medicos")
+    console.log(medicos)
+    console.log("Clon de medicos")
     // Clonación profunda ( con esto podemos clonar los objetos anidados )
-    let clondoctors = JSON.parse(JSON.stringify(nuevosServicios)); // Clonamos el objeto con merge
+    let clonMedicos = JSON.parse(JSON.stringify(medicos)); // Clonamos el objeto con merge
 
+    console.log(clonMedicos)
 
-  
-// Función para mostrar los doctores en la tabla
-      function mostrarDoctores() {
-        const doctorCards = document.getElementById('doctorCards');
-        doctorCards.innerHTML = '';  
-
-        // Usamos el método map para recorrer el arreglo y mostrar los datos con destructuring
-        clondoctors.map(({ id, nombre, especialidad, imagen, experiencia, sexo }) => {
-            const card = document.createElement('div');
-            card.classList.add('col-md-4', 'my-2');
-
-            // Condicional segun genero para llamar dr o dra
-            if (sexo === "m") {
-                sexo = "Dr."
-            } else {
-                sexo = "Dra."
-            }
-
-            // Agregar datos a la tarjeta
-            card.innerHTML = `
-                    <div class="card">
-                        <div class="card-head mt-2">
-                            <button class="button" onclick="eliminarDoctor(${id})" class="btn btn-danger btn-sm rounded-0">X</button>
-                        </div>
-                        <div class="card-body text-center">
-                            <img src="${imagen}" width="100" height="100" class="rounded-circle">
-                            <h5 class="card-title">${sexo} ${nombre}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${especialidad}</h6>
-                            <p class="card-text">Experiencia: ${experiencia} años </p>
-                        </div>
-                    </div>   
-            `;
-
-            doctorCards.appendChild(card); 
-        });
-        
-      }
-
-
-      // Función para agregar un nuevo doctor
-    document.getElementById("addDoctorForm").addEventListener("submit", function (event) {
-        event.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
-
-        const nombre = document.getElementById("nombre").value;
-        const especialidad = document.getElementById("especialidad").value;
-        const experiencia = document.getElementById("experiencia").value;  
-        const sexo = document.getElementById("genero").value;   
-
-        // Crear un nuevo objeto doctor
-        const nuevoDoctor = {
-            id: clondoctors.length + 1,  // Asignamos un ID único
-            nombre: nombre,
-            especialidad: especialidad,
-            experiencia: experiencia,
-            imagen: "assets/images/profile01.jpg",
-            sexo: sexo
-        };
-
-        // Agregar el nuevo doctor al array de doctores   
-        clondoctors.push(nuevoDoctor);
-
-        // Limpiar los campos del formulario
-        document.getElementById("nombre").value = "";
-        document.getElementById("especialidad").value = "";
-        document.getElementById("experiencia").value = "";
-
-        // Volver a mostrar la lista de doctores
-        mostrarDoctores(clondoctors);
-    });
-  
-
-      // Función para buscar doctores por nombre o especialidad
-      function buscarDoctor() {
-        const input = document.getElementById('searchInput').value.toLowerCase();
-        
-        // Filtrar doctores que coincidan con el texto ingresado (nombre o especialidad)
-        const doctoresFiltrados = clondoctors.filter(doctor => 
-          doctor.nombre.toLowerCase().includes(input) || 
-          doctor.especialidad.toLowerCase().includes(input)
-        );
-        
-        mostrarDoctoresConFiltro(doctoresFiltrados);
-      }
-  
-    // Función para mostrar los doctores con el filtro aplicado
-    function mostrarDoctoresConFiltro(doctoresFiltrados) {
-        const doctorCards = document.getElementById('doctorCards');
-        doctorCards.innerHTML = '';  // Limpiar las cards actuales
-  
-        doctoresFiltrados.map(({ id, nombre, especialidad, imagen, experiencia }) => {
-            const card = document.createElement('div');
-            card.classList.add('col-md-4', 'my-2');
-
-            card.innerHTML = `
-                    <div class="card">
-                        <div class="card-head mt-2">
-                            <button class="button" onclick="eliminarDoctor(${id})" class="btn btn-danger btn-sm rounded-0">X</button>
-                        </div>
-                        <div class="card-body text-center">
-                            <img src="${imagen}" width="100" height="100" class="rounded-circle">
-                            <h5 class="card-title">${nombre}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${especialidad}</h6>
-                            <p class="card-text">Experiencia: ${experiencia} años </p>
-                        </div>
-                    </div>   
-            `;
-
-            doctorCards.appendChild(card); 
-        });
-      }
-  
-    // Función para eliminar un doctor por ID
-    function eliminarDoctor(id) {
-        // Filtrar el doctor con el ID correspondiente
-        const indice = clondoctors.findIndex(doctor => doctor.id === id);
-        if (indice !== -1) {
-            clondoctors.splice(indice, 1);  // Eliminar el doctor del arreglo
-            mostrarDoctores();  // Actualizar 
-        }
-    }
-  
-
-    // Estado para saber si el orden es ascendente o descendente
-    let ordenAscendenteNombre = true;  // Para el nombre
-    let ordenAscendenteExperiencia = true;  // Para la experiencia      
-  
-    // Función para alternar el orden de los doctores por nombre
-    function alternarOrdenarPorNombre() {
-        ordenAscendenteNombre = !ordenAscendenteNombre;  // Cambiar el estado
-        const iconoNombre = document.getElementById('iconoNombre');
-        
-        clondoctors.sort((a, b) => {
-          if (ordenAscendenteNombre) {
-            iconoNombre.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
-            return a.nombre.localeCompare(b.nombre);  // Orden ascendente
-          } else {
-            iconoNombre.className = "bx bx-down-arrow-alt";  // Mostrar icono descendente
-            return b.nombre.localeCompare(a.nombre);  // Orden descendente
-          }
-        });
-        mostrarDoctores();  // Actualizar la tabla
-      }
-  
-      // Función para alternar el orden de los doctores por experiencia
-      function alternarOrdenarPorExperiencia() {
-        ordenAscendenteExperiencia = !ordenAscendenteExperiencia;  // Cambiar el estado
-        const iconoExperiencia = document.getElementById('iconoExperiencia');
-        
-        clondoctors.sort((a, b) => {
-          if (ordenAscendenteExperiencia) {
-            iconoExperiencia.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
-            return a.experiencia - b.experiencia;  // Orden ascendente
-          } else {
-            iconoExperiencia.className = "bx bx-down-arrow-alt";  // Mostrar icono descendente
-            return b.experiencia - a.experiencia;  // Orden descendente
-          }
-        });
-        mostrarDoctores();  // Actualizar la tabla
-      }
-  
-      // Mostrar los doctores al cargar la página
-      window.onload = mostrarDoctores;
-
-
-/// Función que se ejecutará cuando haya cambios en el DOM
-function actualizaConCambio() {
-    console.clear();   
-    console.log("arreglo original:"); 
-    console.log(doctores);
-    console.log("clon:"); 
-    console.log(clondoctors);
-
-    // Aquí puedes poner la lógica que necesites para actualizar la función
+    // Renderizar los médicos
+    renderizarMedicos();
+  } catch (error) {
+    console.error('Error al obtener los médicos:', error);
   }
-  
-  // Configuración de la observación
-  const observer = new MutationObserver((mutationsList, observer) => {
-    // Iterar sobre los cambios detectados
-    for (let mutation of mutationsList) {
-      if (mutation.type === 'childList' || mutation.type === 'attributes') {
-        actualizaConCambio();
-      }
+}
+
+
+
+// Función merge
+function mergeMedicos(original, update) {
+  const medicosMap = new Map(original.map(medico => [medico.id, medico]));
+
+  update.forEach(medico => {
+    if (medicosMap.has(medico.id)) {
+      medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
+    } else {
+      medicosMap.set(medico.id, medico);
     }
   });
+
+  return Array.from(medicosMap.values());
+}
+
+
+
+
+
+// Función para filtrar los médicos por nombre
+function filtrarMedicos() {
+  const query = searchInput.value.toLowerCase();  // Convertir a minúsculas para hacer la búsqueda insensible a mayúsculas
+  const medicosFiltrados = medicos.filter(medico => 
+    medico.nombre.toLowerCase().includes(query) || 
+    medico.especialidad.toLowerCase().includes(query)
+  );
+
+  renderizarMedicos(medicosFiltrados);  // Renderizar los médicos filtrados
+}
+
+// Función para ordenar los médicos por nombre (ascendente o descendente)
+function ordenarPorNombre() {
+
+
+  if (sortAscendente) {
+    medicos.sort((a, b) => a.nombre.localeCompare(b.nombre));  // Orden ascendente
+    iconoNombre.className = "bx bx-down-arrow-alt";  // Mostrar icono ascendente
+  } else {
+    medicos.sort((a, b) => b.nombre.localeCompare(a.nombre));  // Orden descendente
+    iconoNombre.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
+  }
+
+  // Alternar el estado de orden
+  sortAscendente = !sortAscendente;
+
+  renderizarMedicos();
+}
+
+// Función para ordenar los médicos por experiencia (ascendente o descendente)
+function ordenarPorExperiencia() {
+  if (sortAscendente) {
+    medicos.sort((a, b) => a.experiencia - b.experiencia);  // Orden ascendente por experiencia
+    iconoExperiencia.className = "bx bx-down-arrow-alt";  // Mostrar icono ascendente
+  } else {
+    medicos.sort((a, b) => b.experiencia - a.experiencia);  // Orden descendente por experiencia
+    iconoExperiencia.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
+  }
+
+  // Alternar el estado de orden
+  sortAscendente = !sortAscendente;
+
+  renderizarMedicos();
+}
+
+
+// Función para renderizar la lista de médicos
+function renderizarMedicos() {
+  const medicosParaRenderizar = arguments.length > 0 ? arguments[0] : medicos;
+
+  medicosTableBody.innerHTML = '';  // Limpiar tabla
+
+  medicosParaRenderizar.map(({ id, nombre, especialidad, imagen, experiencia, genero }) => {
+    const card = document.createElement('div');
+    card.classList.add('col-md-4', 'my-2');
+
+                // Condicional segun genero para llamar dr o dra
+                if (genero === "m") {
+                  genero = "Dr."
+              } else {
+                  genero = "Dra."
+              }
+
+    card.innerHTML = `
+                    <div class="card">
+                        <div class="card-head mt-2">
+                            <button class="button" onclick="eliminarMedico(${id})" class="btn btn-danger btn-sm rounded-0">X</button>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="${imagen}" width="100" height="100" class="rounded-circle">
+                            <h5 class="card-title">${genero} ${nombre}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${especialidad}</h6>
+                            <p class="card-text">Experiencia: ${experiencia} años </p>
+                        </div>
+                    </div>  
+    `;
+    medicosTableBody.appendChild(card);
+  });
+}
+
+// Función para agregar 
+async function guardarMedico() {
+  const nombre = nombreInput.value;
+  const especialidad = especialidadInput.value;
+  const experiencia = experienciaInput.value;
+  const genero = generoInput.value;
   
-  // Opciones del observer (puedes ajustarlas según lo que necesites)
-  const config = { 
-    childList: true, // Detecta cambios en la estructura del DOM (añadir/eliminar nodos)
-    subtree: true,   // Observa todo el árbol de nodos, no solo los nodos inmediatos
-    attributes: true // Detecta cambios en los atributos de los elementos
-  };
-  
-  // Selecciona el nodo que deseas observar (por ejemplo, el body)
-  const targetNode = document.body;
-  
-  // Inicia la observación
-  observer.observe(targetNode, config);
+
+  if (!nombre || !especialidad) {
+    alert("Debe completar todos los campos.");
+    return;
+  }
+
+  const id = medicoIdInput.value;
+
+  if (id) {
+    const medico = medicos.find(m => m.id == id);
+    medico.nombre = nombre;
+    medico.especialidad = especialidad;
+    medico.experiencia = experiencia;
+    medico.genero = genero;
+  } else {
+    const nuevoMedico = {
+      id: medicos.length + 1,  
+      nombre: nombre,
+      especialidad: especialidad,
+      experiencia: experiencia,
+      imagen: "assets/images/profile01.jpg",
+      genero: genero
+    };
+    medicos.push(nuevoMedico);
+  }
+
+  nombreInput.value = '';
+  especialidadInput.value = '';
+  medicoIdInput.value = '';
+  experienciaInput.value = '';
+  generoInput.value = '';
+  renderizarMedicos();
+}
+
+
+
+function eliminarMedico(id) {
+  // Filtrar el doctor con el ID correspondiente
+  const indice = medicos.findIndex(medico => medico.id === id);
+  console.log(id)
+  if (indice !== -1) {
+      medicos.splice(indice, 1);  // Eliminar el doctor del arreglo
+      renderizarMedicos();
+  }
+}
+
+// Evento para guardar médico (agregar o actualizar)
+guardarBtn.addEventListener('click', guardarMedico);
+
+// Evento para buscar médicos en tiempo real
+searchInput.addEventListener('input', filtrarMedicos);
+
+// Evento para alternar el orden de los médicos por nombre
+toggleSortBtn.addEventListener('click', ordenarPorNombre);
+
+// Evento para alternar el orden de los médicos por experiencia
+sortByExperienceBtn.addEventListener('click', ordenarPorExperiencia);
+
+// Inicializar la tabla con los médicos cuando se carga la página
+obtenerMedicos();
+
+// Función para validar que la experiencia solo sea un numero
+function validarNumero(input) {
+  // Elimina cualquier carácter que no sea un número
+  input.value = input.value.replace(/[^0-9]/g, '');
+}

@@ -52,6 +52,8 @@
 │         ├── agendar.js
 │         ├── contacto.js
 │         ├── equipo.js
+│         ├── medicos.json
+│         ├── medicos_update.json
 │         └── main.js       
 │
 ├── contacto.html  
@@ -64,9 +66,10 @@
 ##  Objetos JSON
 En la Web de Hospital implemente dos arreglos de JSON, uno de doctores con objetos anidados y otro de servicios proporcionados por ciertos doctores.
 
-En los objetos de los doctores, utilicé los siguientes valores: id, nombre, sexo, especialidad, imagen (en formato JPG), experiencia, disponibilidad y un objeto anidado de contacto que incluye teléfono y email.
+En los objetos de los médicos, utilicé los siguientes valores: id, nombre, sexo, especialidad, imagen (en formato JPG), experiencia, disponibilidad y un objeto anidado de contacto que incluye teléfono y email.
 ```
-const doctores = [
+medicos.json
+ [
     {
         "id": 1,
         "nombre": "Mauricio Palma",
@@ -80,37 +83,37 @@ const doctores = [
           "email": "j@gmail.com"
           }
     },
-    ...
+    ...]
 ```
 
-En los objetos de servicios, utilicé un id (que posteriormente se usará para hacer el merge con el id del doctor) y el nombre del servicio.
+Para el merge, utilicé un arreglo de médicos que se combinan con el arreglo original.
 ```
-const servicios = [
-    { "id_medico": 1, "servicio": "Consulta Cardiológica" },
-    ...
+medicos_update.json
+[
+    { "id": 2, "nombre": "Ana García", "especialidad": "Pediatra", "telefono": "123-456-7890" },
+    { "id": 4, "nombre": "Pedro Gómez", "especialidad": "Neurología" }
+  ]
+  
 ```
 
 ### Merge
-Para realizar el merge, utilicé una función que emplea el método map(). Esta función genera un nuevo arreglo de médicos, en el que cada médico incluye un conjunto de servicios asociados, los cuales se asignan según su id.
+Para el merge, utilicé un arreglo de médicos que se combinan con el arreglo original.
 
 ```
-    // Función para fusionar los médicos con sus servicios
-    function mergeMedicosConServicios() {
-        // Usamos `map()` para recorrer los médicos
-        const medicosConServicios = doctores.map(medico => {
-          // Filtramos los servicios que pertenecen a este médico
-          const serviciosMedico = servicios.filter(servicio => servicio.id_medico === medico.id)
-                                           .map(servicio => servicio.servicio); // Obtenemos solo el nombre del servicio por id
-  
-          // Devolvemos el médico con una nueva propiedad 'servicios'
-          return {
-            ...medico, // Medico
-            servicios: serviciosMedico // Servicios
-          };
-        });
-  
-        return medicosConServicios; // Devolvemos el array de médicos con sus servicios
-      }
+// Función merge
+function mergeMedicos(original, update) {
+  const medicosMap = new Map(original.map(medico => [medico.id, medico]));
+
+  update.forEach(medico => {
+    if (medicosMap.has(medico.id)) {
+      medicosMap.set(medico.id, { ...medicosMap.get(medico.id), ...medico });
+    } else {
+      medicosMap.set(medico.id, medico);
+    }
+  });
+
+  return Array.from(medicosMap.values());
+}
 ```
 
 ### Clonación
