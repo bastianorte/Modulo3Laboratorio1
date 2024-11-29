@@ -64,6 +64,10 @@
 ```
 
 ##  Objetos JSON
+<picture>
+  <img src="https://github.com/bastianorte/Modulo3Laboratorio1/blob/main/assets/images/cap1.png">
+</picture>
+
 En la Web de Hospital implemente dos arreglos de JSON, uno de doctores con objetos anidados y otro de servicios proporcionados por ciertos doctores.
 
 En los objetos de los médicos, utilicé los siguientes valores: id, nombre, sexo, especialidad, imagen (en formato JPG), experiencia, disponibilidad y un objeto anidado de contacto que incluye teléfono y email.
