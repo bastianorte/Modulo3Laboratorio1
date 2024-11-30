@@ -64,6 +64,7 @@
 ```
 
 ##  Objetos JSON
+
 <picture>
   <img src="https://github.com/bastianorte/Modulo3Laboratorio1/blob/main/assets/images/cap1.png">
 </picture>
@@ -194,6 +195,11 @@ function ordenarPorExperiencia() {
 
 
 ### Colas
+
+<picture>
+  <img src="https://github.com/bastianorte/Modulo3Laboratorio1/blob/main/assets/images/cap2.png">
+</picture>
+
 Para gestionar las colas, utilicé una estructura que garantizara que los pacientes fueran atendidos en el mismo orden en que se registraron en la ventana de contacto.
 
 Utilice el metodo push() para agregar pacientes al arreglo
@@ -214,6 +220,11 @@ const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer pacient
 ```
 
 ### Pilas
+
+<picture>
+  <img src="https://github.com/bastianorte/Modulo3Laboratorio1/blob/main/assets/images/cap4.png">
+</picture>
+
 Para gestionar las pilas, utilicé una estructura que permitiera eliminar la última cita registrada en la ventana de agendar hora.
 
 Utilice el metodo push para agregar citas al arreglo
