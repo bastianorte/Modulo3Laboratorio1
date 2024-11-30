@@ -1,4 +1,4 @@
-# Evaluacion m2 t3
+# Evaluacion Modulo 3 Laboratorio 1
 
 ## 👁️ Acceso al proyecto
   Para visualizar el archivo HTML y poder modificar el archivo SASS
