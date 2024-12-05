@@ -1,6 +1,5 @@
-// Una cola: El cliente que toma el primer boleto debe ser atendido primero. 
+// Una cola
 
-    // Cola para manejar a los pacientes
     let colaPacientes = [];
 
     // Función para registrar un paciente (enqueue)
@@ -14,23 +13,22 @@
           fechaHora: fechaHoraRegistro
         };
 
-        colaPacientes.push(paciente);  // Encolar paciente al final
+        colaPacientes.push(paciente);  // Agregar paciente
         actualizarLista();
-        document.getElementById('nombre').value = '';  // Limpiar el campo de texto
+        document.getElementById('nombre').value = ''; 
       } else {
         alert('Por favor, ingrese un nombre.');
       }
     }
 
-    // Función para ordenar la hora obtenida en español
-    // la hora actual solo se pondra para confirmar el funcionamiento como cola y de forma estetica
+    // Hora en español
     function obtenerFechaHoraActual() {
       const ahora = new Date();
       const opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       return new Intl.DateTimeFormat('es-ES', opciones).format(ahora);
     }
 
-    // Función para atender un paciente (dequeue)
+    // Eliminar primer paciente
     function atenderPaciente() {
       if (colaPacientes.length > 0) {
         const pacienteAtendido = colaPacientes.shift();  // Desencolar el primer paciente
@@ -41,7 +39,6 @@
       }
     }
 
-    // Función para actualizar la lista de pacientes en la interfaz
     function actualizarLista() {
       const lista = document.getElementById('listaPacientes');
       lista.innerHTML = '';  // Limpiar lista

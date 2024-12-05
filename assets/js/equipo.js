@@ -1,4 +1,4 @@
-// Variables del DOM
+// Variables 
 const medicosTableBody = document.getElementById('medicosTable')
 const nombreInput = document.getElementById('nombre');
 const especialidadInput = document.getElementById('especialidad');
@@ -12,23 +12,23 @@ const iconoNombre = document.getElementById('iconoNombre');
 const iconoExperiencia = document.getElementById('iconoExperiencia');
 const sortByExperienceBtn = document.getElementById('sortByExperienceBtn');
 
-// Variable global para los médicos
+
 let medicos = [];
-let sortAscendente = true; // Control de si el orden es ascendente (true) o descendente (false)
+let sortAscendente = true; 
 let ordenAscendenteExperiencia = true;
 
-// Función para obtener los datos de los médicos de forma asíncrona (simula fetch desde un archivo JSON)
+// async medicos
 async function obtenerMedicos() {
   try {
-    const medicosResponse = await fetch('assets/js/medicos.json');  // Obtiene el primer JSON (médicos iniciales)
-    const updateResponse = await fetch('assets/js/medicos_update.json');  // Obtiene el segundo JSON (actualizaciones)
+    const medicosResponse = await fetch('assets/js/medicos.json');  // medicos
+    const updateResponse = await fetch('assets/js/medicos_update.json');  // nuevos medicos
 
     if (!medicosResponse.ok || !updateResponse.ok) throw new Error('Error al obtener los datos.');
 
-    const medicosData = await medicosResponse.json();  // Datos iniciales
-    const updateData = await updateResponse.json();    // Datos de actualización
+    const medicosData = await medicosResponse.json(); 
+    const updateData = await updateResponse.json();   
 
-    // Fusionar los dos JSON
+    // Fusionar
     medicos = mergeMedicos(medicosData, updateData);
 
     // Medicos Stringify
@@ -37,18 +37,18 @@ async function obtenerMedicos() {
     console.log("Medicos")
     console.log(medicos)
     console.log("Clon de medicos")
-    // Clonación profunda ( con esto podemos clonar los objetos anidados )
-    let clonMedicos = JSON.parse(JSON.stringify(medicos)); // Clonamos el objeto con merge
+
+    // Clonación profunda 
+    let clonMedicos = JSON.parse(JSON.stringify(medicos)); 
 
     console.log(clonMedicos)
 
-    // Renderizar los médicos
+
     renderizarMedicos();
   } catch (error) {
     console.error('Error al obtener los médicos:', error);
   }
 }
-
 
 
 // Función merge
@@ -67,60 +67,56 @@ function mergeMedicos(original, update) {
 }
 
 
-
-
-
-// Función para filtrar los médicos por nombre
+// Filtrar medicos por nombre
 function filtrarMedicos() {
-  const query = searchInput.value.toLowerCase();  // Convertir a minúsculas para hacer la búsqueda insensible a mayúsculas
+  const query = searchInput.value.toLowerCase();  
   const medicosFiltrados = medicos.filter(medico => 
     medico.nombre.toLowerCase().includes(query) || 
     medico.especialidad.toLowerCase().includes(query)
   );
 
-  renderizarMedicos(medicosFiltrados);  // Renderizar los médicos filtrados
+  renderizarMedicos(medicosFiltrados); 
 }
 
-// Función para ordenar los médicos por nombre (ascendente o descendente)
+// ordenar medicos
 function ordenarPorNombre() {
 
 
   if (sortAscendente) {
-    medicos.sort((a, b) => a.nombre.localeCompare(b.nombre));  // Orden ascendente
-    iconoNombre.className = "bx bx-down-arrow-alt";  // Mostrar icono ascendente
+    medicos.sort((a, b) => a.nombre.localeCompare(b.nombre)); 
+    iconoNombre.className = "bx bx-down-arrow-alt";  
   } else {
-    medicos.sort((a, b) => b.nombre.localeCompare(a.nombre));  // Orden descendente
-    iconoNombre.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
+    medicos.sort((a, b) => b.nombre.localeCompare(a.nombre)); 
+    iconoNombre.className = "bx bx-up-arrow-alt";  
   }
 
-  // Alternar el estado de orden
+
   sortAscendente = !sortAscendente;
 
   renderizarMedicos();
 }
 
-// Función para ordenar los médicos por experiencia (ascendente o descendente)
+// ordenar medicos
 function ordenarPorExperiencia() {
   if (sortAscendente) {
-    medicos.sort((a, b) => a.experiencia - b.experiencia);  // Orden ascendente por experiencia
-    iconoExperiencia.className = "bx bx-down-arrow-alt";  // Mostrar icono ascendente
+    medicos.sort((a, b) => a.experiencia - b.experiencia); 
+    iconoExperiencia.className = "bx bx-down-arrow-alt";  
   } else {
-    medicos.sort((a, b) => b.experiencia - a.experiencia);  // Orden descendente por experiencia
-    iconoExperiencia.className = "bx bx-up-arrow-alt";  // Mostrar icono ascendente
+    medicos.sort((a, b) => b.experiencia - a.experiencia);  
+    iconoExperiencia.className = "bx bx-up-arrow-alt";  
   }
 
-  // Alternar el estado de orden
+  
   sortAscendente = !sortAscendente;
 
   renderizarMedicos();
 }
 
-
-// Función para renderizar la lista de médicos
+// renderizar medicos
 function renderizarMedicos() {
   const medicosParaRenderizar = arguments.length > 0 ? arguments[0] : medicos;
 
-  medicosTableBody.innerHTML = '';  // Limpiar tabla
+  medicosTableBody.innerHTML = '';  
 
   medicosParaRenderizar.map(({ id, nombre, especialidad, imagen, experiencia, genero }) => {
     const card = document.createElement('div');
@@ -193,12 +189,12 @@ async function guardarMedico() {
 
 
 
+// Eliminar medicos
 function eliminarMedico(id) {
-  // Filtrar el doctor con el ID correspondiente
   const indice = medicos.findIndex(medico => medico.id === id);
   console.log(id)
   if (indice !== -1) {
-      medicos.splice(indice, 1);  // Eliminar el doctor del arreglo
+      medicos.splice(indice, 1);  
       renderizarMedicos();
   }
 }
@@ -220,6 +216,7 @@ obtenerMedicos();
 
 // Función para validar que la experiencia solo sea un numero
 function validarNumero(input) {
+  
   // Elimina cualquier carácter que no sea un número
   input.value = input.value.replace(/[^0-9]/g, '');
 }

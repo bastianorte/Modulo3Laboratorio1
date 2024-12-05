@@ -2,12 +2,11 @@
 /// Función que se ejecutará cuando haya cambios en el DOM
 function actualizaConCambio() {
     console.log('El DOM ha cambiado');
-    // Aquí puedes poner la lógica que necesites para actualizar la función
   }
   
   // Configuración de la observación
   const observer = new MutationObserver((mutationsList, observer) => {
-    // Iterar sobre los cambios detectados
+
     for (let mutation of mutationsList) {
       if (mutation.type === 'childList' || mutation.type === 'attributes') {
         actualizaConCambio();

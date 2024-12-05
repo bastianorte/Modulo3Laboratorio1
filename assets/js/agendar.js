@@ -1,4 +1,4 @@
-    // Pila para manejar las citas
+    // Pila 
     let citas = [];
 
     // Función para agendar una cita (push)
@@ -14,8 +14,9 @@
           hora: hora
         };
 
-        citas.push(cita); // Agregar cita a la pila
-        // Limpiar los campos del formulario
+        // Agregar cita
+        citas.push(cita); 
+
         document.getElementById("nombre").value = "";
         document.getElementById("fecha").value = "";
         document.getElementById("hora").value = "";
@@ -27,7 +28,7 @@
       }
     }
 
-    // Función para cancelar la última cita (pop)
+    // Cancelar la última cita (pop)
     function cancelarCita() {
       if (citas.length > 0) {
         const citaCancelada = citas.pop(); // Eliminar la última cita
@@ -38,7 +39,7 @@
       }
     }
 
-    // Función para formatear la fecha en un formato legible
+    // Formatear fecha en español
     function formatearFecha(fecha) {
         const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
         const fechaObj = new Date(fecha);
